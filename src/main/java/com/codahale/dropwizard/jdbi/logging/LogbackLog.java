@@ -1,4 +1,4 @@
-package com.yammer.dropwizard.jdbi.logging;
+package com.codahale.dropwizard.jdbi.logging;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

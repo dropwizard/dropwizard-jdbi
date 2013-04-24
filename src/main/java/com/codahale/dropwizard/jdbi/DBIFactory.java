@@ -1,4 +1,4 @@
-package com.yammer.dropwizard.jdbi;
+package com.codahale.dropwizard.jdbi;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -6,12 +6,12 @@ import com.codahale.metrics.jdbi.InstrumentedTimingCollector;
 import com.codahale.metrics.jdbi.strategies.DelegatingStatementNameStrategy;
 import com.codahale.metrics.jdbi.strategies.NameStrategies;
 import com.codahale.metrics.jdbi.strategies.StatementNameStrategy;
-import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.db.DatabaseConfiguration;
-import com.yammer.dropwizard.db.ManagedDataSource;
-import com.yammer.dropwizard.db.ManagedDataSourceFactory;
-import com.yammer.dropwizard.jdbi.args.OptionalArgumentFactory;
-import com.yammer.dropwizard.jdbi.logging.LogbackLog;
+import com.codahale.dropwizard.config.Environment;
+import com.codahale.dropwizard.db.DatabaseConfiguration;
+import com.codahale.dropwizard.db.ManagedDataSource;
+import com.codahale.dropwizard.db.ManagedDataSourceFactory;
+import com.codahale.dropwizard.jdbi.args.OptionalArgumentFactory;
+import com.codahale.dropwizard.jdbi.logging.LogbackLog;
 import org.skife.jdbi.v2.ColonPrefixNamedParamStatementRewriter;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.StatementContext;

@@ -1,10 +1,10 @@
-package com.yammer.dropwizard.jdbi.bundles;
+package com.codahale.dropwizard.jdbi.bundles;
 
-import com.yammer.dropwizard.Bundle;
-import com.yammer.dropwizard.config.Bootstrap;
-import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.jdbi.jersey.LoggingDBIExceptionMapper;
-import com.yammer.dropwizard.jdbi.jersey.LoggingSQLExceptionMapper;
+import com.codahale.dropwizard.Bundle;
+import com.codahale.dropwizard.config.Bootstrap;
+import com.codahale.dropwizard.config.Environment;
+import com.codahale.dropwizard.jdbi.jersey.LoggingDBIExceptionMapper;
+import com.codahale.dropwizard.jdbi.jersey.LoggingSQLExceptionMapper;
 
 /**
  * A bundle for logging SQLExceptions and DBIExceptions so that their actual causes aren't overlooked.

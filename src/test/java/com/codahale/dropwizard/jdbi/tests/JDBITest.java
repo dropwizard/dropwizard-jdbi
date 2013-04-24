@@ -1,17 +1,17 @@
-package com.yammer.dropwizard.jdbi.tests;
+package com.codahale.dropwizard.jdbi.tests;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.config.LoggingFactory;
-import com.yammer.dropwizard.db.DatabaseConfiguration;
-import com.yammer.dropwizard.db.ManagedDataSource;
-import com.yammer.dropwizard.jdbi.DBIFactory;
-import com.yammer.dropwizard.lifecycle.Managed;
-import com.yammer.dropwizard.setup.AdminEnvironment;
-import com.yammer.dropwizard.setup.LifecycleEnvironment;
+import com.codahale.dropwizard.config.Environment;
+import com.codahale.dropwizard.config.LoggingFactory;
+import com.codahale.dropwizard.db.DatabaseConfiguration;
+import com.codahale.dropwizard.db.ManagedDataSource;
+import com.codahale.dropwizard.jdbi.DBIFactory;
+import com.codahale.dropwizard.lifecycle.Managed;
+import com.codahale.dropwizard.setup.AdminEnvironment;
+import com.codahale.dropwizard.setup.LifecycleEnvironment;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

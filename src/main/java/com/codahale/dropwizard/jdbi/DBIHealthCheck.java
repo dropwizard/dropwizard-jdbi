@@ -1,4 +1,4 @@
-package com.yammer.dropwizard.jdbi;
+package com.codahale.dropwizard.jdbi;
 
 import com.codahale.metrics.health.HealthCheck;
 import org.skife.jdbi.v2.DBI;
