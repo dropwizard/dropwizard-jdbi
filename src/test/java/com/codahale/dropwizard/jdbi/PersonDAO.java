@@ -1,4 +1,4 @@
-package com.codahale.dropwizard.jdbi.tests;
+package com.codahale.dropwizard.jdbi;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;

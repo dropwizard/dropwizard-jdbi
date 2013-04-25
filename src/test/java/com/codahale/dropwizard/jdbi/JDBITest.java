@@ -1,4 +1,4 @@
-package com.codahale.dropwizard.jdbi.tests;
+package com.codahale.dropwizard.jdbi;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
@@ -8,7 +8,6 @@ import com.codahale.dropwizard.config.Environment;
 import com.codahale.dropwizard.logging.LoggingFactory;
 import com.codahale.dropwizard.db.DatabaseConfiguration;
 import com.codahale.dropwizard.db.ManagedDataSource;
-import com.codahale.dropwizard.jdbi.DBIFactory;
 import com.codahale.dropwizard.lifecycle.Managed;
 import com.codahale.dropwizard.setup.AdminEnvironment;
 import com.codahale.dropwizard.setup.LifecycleEnvironment;
