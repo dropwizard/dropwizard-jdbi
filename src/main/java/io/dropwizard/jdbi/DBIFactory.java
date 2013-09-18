@@ -1,18 +1,18 @@
-package com.codahale.dropwizard.jdbi;
+package io.dropwizard.jdbi;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import com.codahale.dropwizard.db.DataSourceFactory;
-import com.codahale.dropwizard.db.ManagedDataSource;
-import com.codahale.dropwizard.jdbi.args.JodaDateTimeArgumentFactory;
-import com.codahale.dropwizard.jdbi.args.JodaDateTimeMapper;
-import com.codahale.dropwizard.jdbi.args.OptionalArgumentFactory;
-import com.codahale.dropwizard.jdbi.logging.LogbackLog;
-import com.codahale.dropwizard.setup.Environment;
 import com.codahale.metrics.jdbi.InstrumentedTimingCollector;
 import com.codahale.metrics.jdbi.strategies.DelegatingStatementNameStrategy;
 import com.codahale.metrics.jdbi.strategies.NameStrategies;
 import com.codahale.metrics.jdbi.strategies.StatementNameStrategy;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.db.ManagedDataSource;
+import io.dropwizard.jdbi.args.JodaDateTimeArgumentFactory;
+import io.dropwizard.jdbi.args.JodaDateTimeMapper;
+import io.dropwizard.jdbi.args.OptionalArgumentFactory;
+import io.dropwizard.jdbi.logging.LogbackLog;
+import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.ColonPrefixNamedParamStatementRewriter;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.StatementContext;

@@ -1,4 +1,4 @@
-package com.codahale.dropwizard.jdbi;
+package io.dropwizard.jdbi;
 
 import com.google.common.collect.ImmutableSet;
 import org.skife.jdbi.v2.ContainerBuilder;

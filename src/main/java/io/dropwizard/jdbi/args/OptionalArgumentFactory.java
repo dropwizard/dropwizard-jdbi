@@ -1,4 +1,4 @@
-package com.codahale.dropwizard.jdbi.args;
+package io.dropwizard.jdbi.args;
 
 import com.google.common.base.Optional;
 import org.skife.jdbi.v2.StatementContext;

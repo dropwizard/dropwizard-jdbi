@@ -1,16 +1,16 @@
-package com.codahale.dropwizard.jdbi;
+package io.dropwizard.jdbi;
 
-import com.codahale.dropwizard.db.DataSourceFactory;
-import com.codahale.dropwizard.db.ManagedDataSource;
-import com.codahale.dropwizard.lifecycle.Managed;
-import com.codahale.dropwizard.lifecycle.setup.LifecycleEnvironment;
-import com.codahale.dropwizard.logging.LoggingFactory;
-import com.codahale.dropwizard.setup.Environment;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.db.ManagedDataSource;
+import io.dropwizard.lifecycle.Managed;
+import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
+import io.dropwizard.logging.LoggingFactory;
+import io.dropwizard.setup.Environment;
 import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;

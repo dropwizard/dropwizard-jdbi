@@ -1,4 +1,4 @@
-package com.codahale.dropwizard.jdbi;
+package io.dropwizard.jdbi;
 
 import org.skife.jdbi.v2.Binding;
 import org.skife.jdbi.v2.StatementContext;
