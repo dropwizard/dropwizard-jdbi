@@ -1,21 +1,23 @@
 package io.dropwizard.jdbi.args;
 
-import org.joda.time.DateTime;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultColumnMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.TimeZone;
 
 /**
- * A {@link ResultColumnMapper} to map Joda {@link DateTime} objects.
+ * A {@link ResultColumnMapper} to map {@link ZonedDateTime} objects.
  */
-public class JodaDateTimeMapper implements ResultColumnMapper<DateTime> {
+public class ZonedDateTimeMapper implements ResultColumnMapper<ZonedDateTime> {
 
     /**
      * <p>{@link Calendar} for representing a database time zone.<p>
@@ -26,11 +28,11 @@ public class JodaDateTimeMapper implements ResultColumnMapper<DateTime> {
      */
     private Optional<Calendar> calendar;
 
-    public JodaDateTimeMapper() {
+    public ZonedDateTimeMapper() {
         calendar = Optional.empty();
     }
 
-    public JodaDateTimeMapper(Optional<TimeZone> timeZone) {
+    public ZonedDateTimeMapper(Optional<TimeZone> timeZone) {
         calendar = timeZone.map(GregorianCalendar::new);
     }
 
@@ -50,20 +52,24 @@ public class JodaDateTimeMapper implements ResultColumnMapper<DateTime> {
     }
 
     @Override
-    public DateTime mapColumn(ResultSet r, int columnNumber, StatementContext ctx) throws SQLException {
+    public ZonedDateTime mapColumn(ResultSet r, int columnNumber, StatementContext ctx) throws SQLException {
         final Timestamp timestamp = calendar.isPresent() ? r.getTimestamp(columnNumber, cloneCalendar()) :
             r.getTimestamp(columnNumber);
-        if (timestamp == null) {
-            return null;
-        }
-        return new DateTime(timestamp.getTime());    }
+        return convertToZonedDateTime(timestamp);
+    }
 
     @Override
-    public DateTime mapColumn(ResultSet r, String columnLabel, StatementContext ctx) throws SQLException {
+    public ZonedDateTime mapColumn(ResultSet r, String columnLabel, StatementContext ctx) throws SQLException {
         final Timestamp timestamp = calendar.isPresent() ? r.getTimestamp(columnLabel, cloneCalendar()) :
             r.getTimestamp(columnLabel);
+        return convertToZonedDateTime(timestamp);
+    }
+
+    private ZonedDateTime convertToZonedDateTime(Timestamp timestamp) {
         if (timestamp == null) {
             return null;
         }
-        return new DateTime(timestamp.getTime());    }
+        final Optional<ZoneId> zoneId = calendar.flatMap(c -> Optional.of(c.getTimeZone().toZoneId()));
+        return ZonedDateTime.ofInstant(Instant.ofEpochMilli(timestamp.getTime()), zoneId.orElse(ZoneId.systemDefault()));
+    }
 }

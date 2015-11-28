@@ -1,11 +1,10 @@
 package io.dropwizard.jdbi;
 
+import com.google.common.base.Optional;
 import org.skife.jdbi.v2.ContainerBuilder;
 import org.skife.jdbi.v2.tweak.ContainerFactory;
 
-import java.util.Optional;
-
-public class OptionalContainerFactory implements ContainerFactory<Optional<?>> {
+public class GuavaOptionalContainerFactory implements ContainerFactory<Optional<?>> {
 
     @Override
     public boolean accepts(Class<?> type) {
@@ -19,11 +18,11 @@ public class OptionalContainerFactory implements ContainerFactory<Optional<?>> {
 
     private static class OptionalContainerBuilder implements ContainerBuilder<Optional<?>> {
 
-        Optional<?> optional = Optional.empty();
+        private Optional<?> optional = Optional.absent();
 
         @Override
         public ContainerBuilder<Optional<?>> add(Object it) {
-            optional = Optional.ofNullable(it);
+            optional = Optional.fromNullable(it);
             return this;
         }
 

@@ -1,19 +1,19 @@
 package io.dropwizard.jdbi.args;
 
-import org.joda.time.DateTime;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.Argument;
 import org.skife.jdbi.v2.tweak.ArgumentFactory;
 
+import java.time.OffsetDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.TimeZone;
 
 /**
- * An {@link ArgumentFactory} for Joda {@link DateTime} arguments.
+ * An {@link ArgumentFactory} for {@link OffsetDateTime} arguments.
  */
-public class JodaDateTimeArgumentFactory implements ArgumentFactory<DateTime> {
+public class OffsetDateTimeArgumentFactory implements ArgumentFactory<OffsetDateTime> {
 
     /**
      * <p>{@link Calendar} for representing a database time zone.<p>
@@ -24,7 +24,7 @@ public class JodaDateTimeArgumentFactory implements ArgumentFactory<DateTime> {
      */
     private final Optional<Calendar> calendar;
 
-    public JodaDateTimeArgumentFactory() {
+    public OffsetDateTimeArgumentFactory() {
         calendar = Optional.empty();
     }
 
@@ -33,7 +33,7 @@ public class JodaDateTimeArgumentFactory implements ArgumentFactory<DateTime> {
      *
      * @param timeZone a time zone representing an offset
      */
-    public JodaDateTimeArgumentFactory(Optional<TimeZone> timeZone) {
+    public OffsetDateTimeArgumentFactory(Optional<TimeZone> timeZone) {
         calendar = timeZone.map(GregorianCalendar::new);
     }
 
@@ -41,13 +41,13 @@ public class JodaDateTimeArgumentFactory implements ArgumentFactory<DateTime> {
     public boolean accepts(final Class<?> expectedType,
                            final Object value,
                            final StatementContext ctx) {
-        return value instanceof DateTime;
+        return value instanceof OffsetDateTime;
     }
 
     @Override
     public Argument build(final Class<?> expectedType,
-                          final DateTime value,
+                          final OffsetDateTime value,
                           final StatementContext ctx) {
-        return new JodaDateTimeArgument(value, calendar);
+        return new OffsetDateTimeArgument(value, calendar);
     }
 }

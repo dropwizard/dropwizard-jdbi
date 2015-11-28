@@ -1,6 +1,5 @@
 package io.dropwizard.jdbi.args;
 
-import org.joda.time.DateTime;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.Argument;
 
@@ -8,18 +7,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.time.OffsetDateTime;
 import java.util.Calendar;
 import java.util.Optional;
 
 /**
- * An {@link Argument} for Joda {@link DateTime} objects.
+ * An {@link Argument} for {@link OffsetDateTime} objects.
  */
-public class JodaDateTimeArgument implements Argument {
+public class OffsetDateTimeArgument implements Argument {
 
-    private final DateTime value;
+    private final OffsetDateTime value;
     private final Optional<Calendar> calendar;
 
-    JodaDateTimeArgument(final DateTime value, final Optional<Calendar> calendar) {
+    OffsetDateTimeArgument(final OffsetDateTime value, final Optional<Calendar> calendar) {
         this.value = value;
         this.calendar = calendar;
     }
@@ -33,9 +33,9 @@ public class JodaDateTimeArgument implements Argument {
                 // We need to make a clone, because Calendar is not thread-safe
                 // and some JDBC drivers mutate it during time calculations
                 Calendar calendarClone = (Calendar) calendar.get().clone();
-                statement.setTimestamp(position, new Timestamp(value.getMillis()), calendarClone);
+                statement.setTimestamp(position, new Timestamp(value.toInstant().toEpochMilli()), calendarClone);
             } else {
-                statement.setTimestamp(position, new Timestamp(value.getMillis()));
+                statement.setTimestamp(position, new Timestamp(value.toInstant().toEpochMilli()));
             }
         } else {
             statement.setNull(position, Types.TIMESTAMP);

@@ -1,5 +1,6 @@
 package io.dropwizard.jdbi;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import org.joda.time.DateTime;
@@ -7,9 +8,7 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
-import java.util.Optional;
-
-public interface PersonDAO {
+public interface GuavaPersonDAO {
     @SqlQuery("SELECT name FROM people WHERE name = :name")
     String findByName(@Bind("name") Optional<String> name);
 

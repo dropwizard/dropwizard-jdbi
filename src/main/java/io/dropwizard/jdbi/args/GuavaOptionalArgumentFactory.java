@@ -1,5 +1,6 @@
 package io.dropwizard.jdbi.args;
 
+import com.google.common.base.Optional;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.Argument;
 import org.skife.jdbi.v2.tweak.ArgumentFactory;
@@ -7,20 +8,13 @@ import org.skife.jdbi.v2.tweak.ArgumentFactory;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Optional;
 
-public class OptionalArgumentFactory implements ArgumentFactory<Optional<Object>> {
+public class GuavaOptionalArgumentFactory implements ArgumentFactory<Optional<Object>> {
     private static class DefaultOptionalArgument implements Argument {
         private final Optional<?> value;
-        private final int nullType;
-
-        private DefaultOptionalArgument(Optional<?> value, int nullType) {
-            this.value = value;
-            this.nullType = nullType;
-        }
 
         private DefaultOptionalArgument(Optional<?> value) {
-            this(value, Types.OTHER);
+            this.value = value;
         }
 
         @Override
@@ -30,7 +24,7 @@ public class OptionalArgumentFactory implements ArgumentFactory<Optional<Object>
             if (value.isPresent()) {
                 statement.setObject(position, value.get());
             } else {
-                statement.setNull(position, nullType);
+                statement.setNull(position, Types.OTHER);
             }
         }
     }
@@ -46,13 +40,13 @@ public class OptionalArgumentFactory implements ArgumentFactory<Optional<Object>
         public void apply(int position,
                           PreparedStatement statement,
                           StatementContext ctx) throws SQLException {
-            statement.setObject(position, value.orElse(null));
+            statement.setObject(position, value.orNull());
         }
     }
 
     private final String jdbcDriver;
 
-    public OptionalArgumentFactory(String jdbcDriver) {
+    public GuavaOptionalArgumentFactory(String jdbcDriver) {
         this.jdbcDriver = jdbcDriver;
     }
 
@@ -65,8 +59,6 @@ public class OptionalArgumentFactory implements ArgumentFactory<Optional<Object>
     public Argument build(Class<?> expectedType, Optional<Object> value, StatementContext ctx) {
         if ("com.microsoft.sqlserver.jdbc.SQLServerDriver".equals(jdbcDriver)) {
             return new MsSqlOptionalArgument(value);
-        } else if ("oracle.jdbc.OracleDriver".equals(jdbcDriver)) {
-            return new DefaultOptionalArgument(value, Types.NULL);
         }
         return new DefaultOptionalArgument(value);
     }
