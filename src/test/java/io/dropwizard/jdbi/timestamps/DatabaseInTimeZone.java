@@ -3,7 +3,6 @@ package io.dropwizard.jdbi.timestamps;
 import org.h2.tools.Server;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +28,7 @@ public class DatabaseInTimeZone  {
         String vmArguments = "-Duser.timezone=" + timeZone.getID();
 
         ProcessBuilder pb = new ProcessBuilder(java, vmArguments, "-cp", h2jar.getAbsolutePath(), Server.class.getName(),
-                                               "-tcp", "-ifNotExists", "-baseDir", tempDir.resolve("database-in-time-zone").toString());
+                "-tcp", " -tcpShutdown", "tcp://localhost:9092", "-ifNotExists", "-baseDir", tempDir.resolve("database-in-time-zone").toString());
         process = pb.start();
     }
 

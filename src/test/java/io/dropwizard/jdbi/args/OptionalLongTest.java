@@ -1,10 +1,7 @@
 package io.dropwizard.jdbi.args;
 
-import com.codahale.metrics.MetricRegistry;
 import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jdbi.DBIFactory;
-import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.junit.jupiter.api.AfterEach;
@@ -23,8 +20,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OptionalLongTest {
-    private final Environment env = new Environment("test-optional-long", Jackson.newObjectMapper(),
-        Validators.newValidator(), new MetricRegistry(), null);
+    private final Environment env = new Environment("test-optional-long");
 
     private TestDao dao;
 

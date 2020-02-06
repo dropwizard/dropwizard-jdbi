@@ -1,11 +1,8 @@
 package io.dropwizard.jdbi.timestamps;
 
-import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
 import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jdbi.DBIFactory;
-import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.setup.Environment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GuavaOptionalOffsetDateTimeTest {
 
-    private final Environment env = new Environment("test-guava-offset-date-time", Jackson.newObjectMapper(),
-            Validators.newValidator(), new MetricRegistry(), null);
+    private final Environment env = new Environment("test-guava-offset-date-time");
 
     private TaskDao dao;
 

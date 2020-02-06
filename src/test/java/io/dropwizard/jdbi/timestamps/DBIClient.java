@@ -1,15 +1,9 @@
 package io.dropwizard.jdbi.timestamps;
 
-import com.codahale.metrics.MetricRegistry;
 import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jdbi.DBIFactory;
-import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
 import org.skife.jdbi.v2.DBI;
 
 import javax.annotation.Nullable;
@@ -40,9 +34,7 @@ public class DBIClient  {
     }
 
     public void before() throws Exception {
-        final Environment environment = new Environment("test", Jackson.newObjectMapper(),
-                                                        Validators.newValidator(), new MetricRegistry(),
-                                                        getClass().getClassLoader());
+        final Environment environment = new Environment("test");
 
         final DataSourceFactory dataSourceFactory = new DataSourceFactory();
         dataSourceFactory.setDriverClass("org.h2.Driver");
