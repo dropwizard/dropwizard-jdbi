@@ -28,20 +28,20 @@ public class DatabaseInTimeZone  {
         String vmArguments = "-Duser.timezone=" + timeZone.getID();
 
         ProcessBuilder pb = new ProcessBuilder(java, vmArguments, "-cp", h2jar.getAbsolutePath(), Server.class.getName(),
-                "-tcp", " -tcpShutdown", "tcp://localhost:9092", "-ifNotExists", "-baseDir", tempDir.resolve("database-in-time-zone").toString());
+                "-tcp", "-tcpPassword", "password", "-ifNotExists", "-baseDir", tempDir.resolve("database-in-time-zone").toString());
         process = pb.start();
     }
 
     protected void after() {
         try {
             // Graceful shutdown of the database
-            Server.shutdownTcpServer("tcp://localhost:9092", "", true, false);
+            Server.shutdownTcpServer("tcp://localhost:9092", "password", true, false);
             boolean exited = waitFor(process, 1, TimeUnit.SECONDS);
             if (!exited) {
                 process.destroy();
             }
         } catch (Exception e) {
-            throw new IllegalStateException("Unable shutdown DB", e);
+            throw new IllegalStateException("Unable to shutdown DB", e);
         }
     }
 
