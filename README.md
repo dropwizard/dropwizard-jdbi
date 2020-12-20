@@ -1,7 +1,7 @@
 # Dropwizard JDBI Bundle
 
-[![Build Status](https://travis-ci.org/dropwizard/dropwizard-jdbi.svg?branch=master)](https://travis-ci.org/dropwizard/dropwizard-jdbi)
-[![Coverage Status](https://img.shields.io/coveralls/dropwizard/dropwizard-jdbi.svg)](https://coveralls.io/r/dropwizard/dropwizard-jdbi)
+[![Build](https://github.com/dropwizard/dropwizard-jdbi/workflows/Build/badge.svg)](https://github.com/dropwizard/dropwizard-jdbi/actions?query=workflow%3ABuild)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dropwizard_dropwizard-jdbi&metric=alert_status)](https://sonarcloud.io/dashboard?id=dropwizard_dropwizard-jdbi)
 [![Maven Central](https://img.shields.io/maven-central/v/io.dropwizard.modules/dropwizard-jdbi.svg)](http://mvnrepository.com/artifact/io.dropwizard.modules/dropwizard-jdbi)
 
 The `dropwizard-jdbi` module provides you with managed access to [JDBI], a flexible and modular library for interacting with relational databases via SQL.
@@ -175,7 +175,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 
 ## License
 
-Copyright (c) 2012-2019 Dropwizard Team
+Copyright (c) 2012-2020 Dropwizard Team
 
 This library is licensed under the Apache License, Version 2.0.
 
