@@ -226,7 +226,6 @@
                 </property>
             </activation>
             <properties>
-                <maven.compiler.optimize>true</maven.compiler.optimize>
                 <gpg.keyname>EDA86E9FB607B5FC9223FB767D4868B53E31E7AD</gpg.keyname>
             </properties>
             <build>
@@ -269,6 +268,12 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

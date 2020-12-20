@@ -2,7 +2,6 @@ dist: xenial
 language: java
 jdk:
 - openjdk8
-- openjdk11
 before_install:
 - rm ~/.m2/settings.xml || true
 - ulimit -c unlimited -S
@@ -11,21 +10,3 @@ after_success:
 cache:
   directories:
   - "$HOME/.m2"
-deploy:
-- provider: script
-  script: bash ci/deploy-snapshot.sh
-  on:
-    repo: dropwizard/dropwizard-jdbi
-    tags: false
-    branch: master
-    jdk: openjdk8
-- provider: script
-  script: bash ci/deploy-release.sh
-  on:
-    repo: dropwizard/dropwizard-jdbi
-    tags: true
-    jdk: openjdk8
-env:
-  global:
-  - secure: H+LSWySA3vSpg615aaGmgnDNlU4R8WdYa9/K4CtA1ixQ2XPcscjU4s5wEDmnLXQyRmr7xcjgAXAO2egSjJ8VK0BVVytgEh7rDriJWyZgJZsBMHlM6icbsfgb809ANMd5jpa3nN4HbE77mOlSMavzkBvxTOGTNSJmbfbTYuM+j+rBF6V3jHyJlw/UcuWqYDBH9JgToryL6E7czFd9gd55IpMKihnpzupEQnmVRZFeTBAjpODOscf9yn2kjHe9cHIgJGTbUMmIPu7CviDUglbdZZ63Tx/71/EcLb9u5DPdTVZrt7wuYzdxpouFAhvOp6mVfFIEZh1tqCd95Tp2NYW1MuZguS4jmaqHlU60d0frXDpbtrJc3ahHucSMFH68VfMR/3AH4bs2ohBhNiWVJcYUj0MP5PYETGcPgw3HPAXlgZU4Djrm8xGzPWv9SXL4lblpDF0s8wBbKBQzCSOQc2QEirNppwTLrsAL3TUl3b7KfXNXNFz3Ye9wM57h2QtJz/vMe49mqk9V4ba1AYioces7M3rlxj3sOZw/tjBQzDboBLTdfWR4xzyBgxW35K9hOfkk6IVlu6Ys5ckl+C341SbgPVAwYS1/RYKnht/1omjnrnBrVh4DToHx7rEXJgCpvJf4Cde0HN5BIh+uqABK4ey/30pX3pfMa8n4qHmImj9MxQA=
-  - secure: eZ0hVew69DNHhcLBxSUQsAUe0rY5qpcL+sXLenBFR2AwgNI2rJMsI01LzRZjgaOW6I0i727fk6SSP49CDoqF/eqVtNmcCM7PvnmXzHPNFn51Jjrc1wZCHIKkhZAR2gQT7q5u7OH14FmVO2b/tzdRYfAk/x33IYcEkWo1xVwChWfAb2Ef8ncun4Mgza65OUcBVPQ9K4ZIjYCj5SDKymVhb9MiBT7SqOYf66Akc9JYJtxxt9yUNuFIm8hgkZjXyVEM6x/+7P1b5YRxWM/ZRaP10GRs3Nwc6aG9OKS7Op2m4Jff7NzMDaAOipSTgw+Yqkut9P387xvziKpgUYFLzxl3t3Qn/RcZJ82RK67qCpwUoMFyEP0QOC9Xwadqno7mPguoEvNDteksy77fSaAKSzJKtiOWXKc40CYspEHNqyaLiVbllZoddxWmppKgTT9cODubYmVwwDiJOC0FQ7aRHw6Wn9ajPHo2quF7cncXqlv2VDD/pWMeNVVJD8sAcGKAJvtKlxjo1bQbC7uVNx3rzfnDk0Oz+jmLBCH+valBdrFSqxgSpYcRP5IJyh4IXZt8xznOjGDXSHKZB8OtlXtQOniWZ9zuCyFzO3WOZJJYn63pz/JMY5zpJnVxmfDYCMepSjCIacuUOnJdlwRRlMl6OXBZ4bPj6O16Pr5CBAYHOZCnidY=
