@@ -78,7 +78,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <jdbi.version>2.78</jdbi.version>
-        <org.reflections.version>0.9.12</org.reflections.version>
+        <org.reflections.version>0.10.2</org.reflections.version>
     </properties>
 
     <dependencies>
