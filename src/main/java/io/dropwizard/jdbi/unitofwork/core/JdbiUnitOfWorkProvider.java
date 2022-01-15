@@ -1,11 +1,10 @@
-package io.dropwizard.jdbi.unitofwork;
+package io.dropwizard.jdbi.unitofwork.core;
 
 import com.google.common.collect.Sets;
 import com.google.common.reflect.Reflection;
-import io.dropwizard.jdbi.unitofwork.core.JdbiHandleManager;
-import io.dropwizard.jdbi.unitofwork.core.ManagedHandleInvocationHandler;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
+import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.sqlobject.SqlBatch;
 import org.skife.jdbi.v2.sqlobject.SqlCall;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -28,8 +27,22 @@ public class JdbiUnitOfWorkProvider {
     private final Logger log = LoggerFactory.getLogger(JdbiUnitOfWorkProvider.class);
     private final JdbiHandleManager handleManager;
 
-    public JdbiUnitOfWorkProvider(JdbiHandleManager handleManager) {
+    private JdbiUnitOfWorkProvider(JdbiHandleManager handleManager) {
         this.handleManager = handleManager;
+    }
+
+    public static JdbiUnitOfWorkProvider withDefault(DBI dbi) {
+        JdbiHandleManager handleManager = new RequestScopedJdbiHandleManager(dbi);
+        return new JdbiUnitOfWorkProvider(handleManager);
+    }
+
+    public static JdbiUnitOfWorkProvider withLinked(DBI dbi) {
+        JdbiHandleManager handleManager = new LinkedRequestScopedJdbiHandleManager(dbi);
+        return new JdbiUnitOfWorkProvider(handleManager);
+    }
+
+    public JdbiHandleManager getHandleManager() {
+        return handleManager;
     }
 
     /**

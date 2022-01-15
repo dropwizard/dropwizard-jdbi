@@ -2,6 +2,7 @@ package io.dropwizard.jdbi.unitofwork.listener;
 
 import com.google.common.collect.Sets;
 import io.dropwizard.jdbi.unitofwork.core.JdbiHandleManager;
+import io.dropwizard.jdbi.unitofwork.core.JdbiUnitOfWorkProvider;
 import org.glassfish.jersey.server.monitoring.ApplicationEvent;
 import org.glassfish.jersey.server.monitoring.RequestEvent;
 import org.glassfish.jersey.server.monitoring.RequestEventListener;
@@ -31,9 +32,12 @@ public class JdbiUnitOfWorkApplicationEventListenerTest {
     public void setUp() {
         JdbiHandleManager handleManager = mock(JdbiHandleManager.class);
         when(handleManager.get()).thenReturn(mock(Handle.class));
+        JdbiUnitOfWorkProvider provider = mock(JdbiUnitOfWorkProvider.class);
+        when(provider.getHandleManager()).thenReturn(handleManager);
+
         requestEvent = mock(RequestEvent.class, Mockito.RETURNS_DEEP_STUBS);
         Set<String> excludedPaths = Sets.newHashSet("excluded");
-        this.applicationListener = new JdbiUnitOfWorkApplicationEventListener(handleManager, excludedPaths);
+        this.applicationListener = new JdbiUnitOfWorkApplicationEventListener(provider, excludedPaths);
     }
 
     @Test

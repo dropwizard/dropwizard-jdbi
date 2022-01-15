@@ -1,11 +1,11 @@
-package io.dropwizard.jdbi.unitofwork;
+package io.dropwizard.jdbi.unitofwork.core;
 
 import com.google.common.collect.Lists;
-import io.dropwizard.jdbi.unitofwork.core.JdbiHandleManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 
@@ -19,14 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JdbiUnitOfWorkProviderTest {
 
     @Mock
-    private JdbiHandleManager handleManager;
+    private DBI dbi;
 
     private JdbiUnitOfWorkProvider provider;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        this.provider = new JdbiUnitOfWorkProvider(handleManager);
+        this.provider = JdbiUnitOfWorkProvider.withDefault(dbi);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class JdbiUnitOfWorkProviderTest {
     @SuppressWarnings("rawtypes")
     public void testGetWrappedInstanceForDaoPackage() {
         Map<? extends Class, Object> instanceObjectMap = provider.getWrappedInstanceForDaoPackage(Lists.newArrayList(
-            "io.dropwizard.jdbi.unitofwork"
+            "io.dropwizard.jdbi.unitofwork.core"
         ));
         assertEquals(2, instanceObjectMap.size());
         assertNotNull(instanceObjectMap.get(DaoA.class));
