@@ -67,8 +67,6 @@ public class JodaDateTimeSqlTimestampTest {
 
     @AfterAll
     static void afterAll() throws Exception {
-        final Handle handle = dbiClient.getDbi().open();
-        handle.execute("SHUTDOWN IMMEDIATELY");
         dbiClient.after();
         databaseInTimeZone.after();
     }

@@ -4,6 +4,7 @@ import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.Argument;
 import org.skife.jdbi.v2.tweak.ArgumentFactory;
 
+import javax.annotation.Nullable;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -50,9 +51,10 @@ public class OptionalArgumentFactory implements ArgumentFactory<Optional<Object>
         }
     }
 
+    @Nullable
     private final String jdbcDriver;
 
-    public OptionalArgumentFactory(String jdbcDriver) {
+    public OptionalArgumentFactory(@Nullable String jdbcDriver) {
         this.jdbcDriver = jdbcDriver;
     }
 
