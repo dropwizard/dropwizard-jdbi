@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -20,7 +21,7 @@ public class OffsetDateTimeMapperTest {
 
     @Test
     public void mapColumnByName() throws Exception {
-        final Instant now = OffsetDateTime.now().toInstant();
+        final Instant now = OffsetDateTime.of(2007, 12, 3, 10, 15, 30, 375_000_000, ZoneOffset.UTC).toInstant();
 
         when(resultSet.getTimestamp("name")).thenReturn(Timestamp.from(now));
 
@@ -40,7 +41,7 @@ public class OffsetDateTimeMapperTest {
 
     @Test
     public void mapColumnByIndex() throws Exception {
-        final Instant now = OffsetDateTime.now().toInstant();
+        final Instant now = OffsetDateTime.of(2007, 12, 3, 10, 15, 30, 375_000_000, ZoneOffset.UTC).toInstant();
 
         when(resultSet.getTimestamp(1)).thenReturn(Timestamp.from(now));
 

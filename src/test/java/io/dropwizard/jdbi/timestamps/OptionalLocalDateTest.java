@@ -44,7 +44,7 @@ public class OptionalLocalDateTest {
 
     @Test
     public void testPresent() {
-        final LocalDate startDate = LocalDate.now();
+        final LocalDate startDate = LocalDate.of(2021, 12, 31);
         final LocalDate endDate = startDate.plusDays(1L);
         dao.insert(1, Optional.of("John Hughes"), startDate, Optional.of(endDate), Optional.empty());
 
@@ -53,7 +53,7 @@ public class OptionalLocalDateTest {
 
     @Test
     public void testAbsent() {
-        dao.insert(2, Optional.of("Kate Johansen"), LocalDate.now(),
+        dao.insert(2, Optional.of("Kate Johansen"), LocalDate.of(2021, 12, 31),
                 Optional.empty(), Optional.of("To be done"));
 
         assertThat(dao.findEndDateById(2).isPresent()).isFalse();

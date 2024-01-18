@@ -14,6 +14,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
 import java.io.IOException;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,7 +46,7 @@ public class GuavaOptionalZonedDateTimeTest {
 
     @Test
     public void testPresent() {
-        final ZonedDateTime startDate = ZonedDateTime.now();
+        final ZonedDateTime startDate = ZonedDateTime.of(2007, 12, 3, 10, 15, 30, 375_000_000, ZoneOffset.UTC);
         final ZonedDateTime endDate = startDate.plusDays(1L);
         dao.insert(1, Optional.of("John Hughes"), startDate, Optional.of(endDate), Optional.absent());
 
@@ -54,7 +55,7 @@ public class GuavaOptionalZonedDateTimeTest {
 
     @Test
     public void testAbsent() {
-        dao.insert(2, Optional.of("Kate Johansen"), ZonedDateTime.now(),
+        dao.insert(2, Optional.of("Kate Johansen"), ZonedDateTime.of(2007, 12, 3, 10, 15, 30, 375_000_000, ZoneOffset.UTC),
                 Optional.absent(), Optional.of("To be done"));
 
         assertThat(dao.findEndDateById(2).isPresent()).isFalse();

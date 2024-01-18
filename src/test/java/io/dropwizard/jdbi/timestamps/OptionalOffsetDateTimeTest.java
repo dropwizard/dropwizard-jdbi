@@ -14,6 +14,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,7 +46,7 @@ public class OptionalOffsetDateTimeTest {
 
     @Test
     public void testPresent() {
-        final OffsetDateTime startDate = OffsetDateTime.now();
+        final OffsetDateTime startDate = OffsetDateTime.of(2007, 12, 3, 10, 15, 30, 375_000_000, ZoneOffset.UTC);
         final OffsetDateTime endDate = startDate.plusDays(1L);
         dao.insert(1, Optional.of("John Hughes"), startDate, Optional.of(endDate), Optional.empty());
 
@@ -54,7 +55,7 @@ public class OptionalOffsetDateTimeTest {
 
     @Test
     public void testAbsent() {
-        dao.insert(2, Optional.of("Kate Johansen"), OffsetDateTime.now(),
+        dao.insert(2, Optional.of("Kate Johansen"), OffsetDateTime.of(2007, 12, 3, 10, 15, 30, 375_000_000, ZoneOffset.UTC),
                 Optional.empty(), Optional.of("To be done"));
 
         assertThat(dao.findEndDateById(2).isPresent()).isFalse();

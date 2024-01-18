@@ -45,7 +45,7 @@ public class GuavaOptionalInstantTest {
 
     @Test
     public void testPresent() {
-        final Instant startDate = Instant.now();
+        final Instant startDate = Instant.ofEpochMilli(1705570308068L);
         final Instant endDate = startDate.plus(1L, ChronoUnit.DAYS);
         dao.insert(1, Optional.of("John Hughes"), startDate, Optional.of(endDate), Optional.absent());
 
@@ -54,7 +54,7 @@ public class GuavaOptionalInstantTest {
 
     @Test
     public void testAbsent() {
-        dao.insert(2, Optional.of("Kate Johansen"), Instant.now(),
+        dao.insert(2, Optional.of("Kate Johansen"), Instant.ofEpochMilli(1705570308068L),
                 Optional.absent(), Optional.of("To be done"));
 
         assertThat(dao.findEndDateById(2).isPresent()).isFalse();

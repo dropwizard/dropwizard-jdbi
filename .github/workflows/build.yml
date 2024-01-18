@@ -1,9 +1,8 @@
 name: Build
-on: 
+on:
   push:
     branches:
     - master
-    - 2.0.x
   pull_request:
 jobs:
   build:
@@ -11,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java_version: ['8', '11']
+        java_version: ['8', '21']
         os: ['ubuntu-latest']
     env:
       JAVA_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
@@ -26,7 +25,7 @@ jobs:
         java-version: ${{ matrix.java_version }}
         cache: 'maven'
     - name: Cache SonarCloud packages
-      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
+      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '21' }}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       uses: actions/cache@v4.0.0
@@ -37,7 +36,7 @@ jobs:
     - name: Build
       run: ./mvnw -B -V -ntp install
     - name: Analyze with SonarCloud
-      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '11' }}
+      if: ${{ env.SONAR_TOKEN != null && env.SONAR_TOKEN != '' && matrix.java_version == '21' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
