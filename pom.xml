@@ -78,6 +78,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <jdbi.version>2.78</jdbi.version>
+        <org.reflections.version>0.10.2</org.reflections.version>
     </properties>
 
     <dependencies>
@@ -146,6 +147,21 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${org.reflections.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -202,7 +218,7 @@
                     <execution>
                         <id>prepare-agent</id>
                         <goals>
-                              <goal>prepare-agent</goal>
+                            <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
